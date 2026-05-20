@@ -573,14 +573,20 @@ body[data-view="play"] #btnTopDraw { display: inline-flex; }
   align-items: center; 
   justify-content: center; 
   padding: 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 .drawer.open { display: flex; }
 .drawer-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); }
 .drawer-panel { 
   position: relative; 
   width: min(800px, 100%); 
-  max-height: 85vh; 
-  overflow: auto; 
+  max-height: min(85vh, calc(100dvh - 40px)); 
+  overflow-y: auto; 
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   padding: 40px; 
   background: #0a0a0a; 
   border: 1px solid var(--line); 
@@ -691,7 +697,9 @@ body[data-view="play"] #btnTopDraw { display: inline-flex; }
   border: 1px solid rgba(212,169,58,.16);
   background: linear-gradient(180deg, rgba(12,10,9,.98), rgba(18,13,10,.96));
   box-shadow: 0 34px 90px rgba(0,0,0,.42);
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 .match-panel::before {
   content: "";
@@ -1738,12 +1746,17 @@ body[data-view="play"] #btnTopDraw { display: inline-flex; }
   .home-cta-band p { max-width: 32ch; font-size: 14px; }
   .home-cta-btn.btn.btn-primary { min-height: 48px; min-width: 148px; font-size: 14px; }
 
+  .drawer {
+    align-items: flex-start;
+    padding: 10px;
+  }
   .drawer-panel,
   .reward-panel,
   .mechanics-panel,
   .match-panel {
     width: min(100%, 100vw - 20px);
-    max-height: calc(100vh - 20px);
+    max-height: calc(100dvh - 20px);
+    margin: auto 0;
     padding: 14px;
     border-radius: 20px;
   }
@@ -1919,12 +1932,16 @@ body[data-view="play"] #btnTopDraw { display: inline-flex; }
   .social-links { gap: 6px; }
   .social-item { min-height: 30px; padding: 0 9px; font-size: 12px; }
 
+  .drawer {
+    padding: 6px;
+  }
   .drawer-panel,
   .reward-panel,
   .mechanics-panel,
   .match-panel {
     width: min(100%, 100vw - 12px);
-    max-height: calc(100vh - 12px);
+    max-height: calc(100dvh - 12px);
+    margin: auto 0;
     padding: 12px;
     border-radius: 18px;
   }
