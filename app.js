@@ -10,7 +10,7 @@ const CONFIG = {
   nativeCurrency: { name: "BNB", symbol: "BNB", decimals: 18 },
   blockExplorerUrls: ["https://bscscan.com"],
 
-  vaultAddress: "" // 正式网金库地址待填写
+  vaultAddress: "0x2BF5549f7920253913A17e81d5e97Eba7CBF2E4b" // 正式网金库地址待填写
 };
 
 const VAULT_ABI = [
