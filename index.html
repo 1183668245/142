@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>一誓爱你·1421</title>
+  <link rel="icon" href="./favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+  <link rel="icon" type="image/webp" href="./logo.webp" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+
+<body>
+  <div class="bg-stadium"></div>
+  <header class="topbar">
+    <div class="brand">
+      <img src="./logo.webp" alt="Logo" class="brand-logo footer-logo">
+      <div class="brand-copy">
+        <h1>一誓爱你·1421</h1>
+        <span class="brand-sub">BNBChain链上誓约纪念协议</span>
+      </div>
+    </div>
+    <div class="nav-shell">
+      <nav class="topnav">
+        <button id="navHome" class="nav-item active" type="button">首页</button>
+        <button id="navStory" class="nav-item" type="button">项目叙事</button>
+        <button id="navMechanics" class="nav-item" type="button">我的奖励</button>
+        <button id="navPlay" class="nav-item" type="button">开始配对</button>
+      </nav>
+    </div>
+    <div class="header-actions">
+      <button id="btnConnect" class="btn btn-primary btn-connect-cta">连接钱包</button>
+      <button id="btnTopDraw" class="btn-task btn-refresh-round icon-only" title="手动刷新/本轮开奖" aria-label="开奖/刷新">
+        <i class="fa-solid fa-arrows-rotate"></i>
+      </button>
+    </div>
+  </header>
+  <main class="main-layout main-shell">
+    <section id="homeView" class="page-view home-view">
+      <div class="top-row home-top-row">
+        <section class="hero-section">
+          <div class="hero-surface">
+            <div class="hero-copy">
+              <span class="hero-eyebrow">基于 BNBChain 的链上誓约纪念协议</span>
+              <h2>
+                <span class="hero-title-main">一誓爱你·1421</span>
+              </h2>
+              <p>BNB Chain 上21 位心动嘉宾，每 5 分钟随机生成一组链上 CP</p>
+              <div class="hero-btns">
+                <button id="btnHeroPlay" class="btn-hero btn-hero-primary" type="button">开始配对</button>
+                <button id="btnHeroMechanics" class="btn-hero btn-hero-outline" type="button">查看誓约机制</button>
+              </div>
+              <div class="hero-stats">
+                <div class="hero-stat-item hero-stat-pool">
+                  <span>当前主奖池</span>
+                  <strong id="jackpotPool">0.00 BNB</strong>
+                  <small>链上实时同步</small>
+                </div>
+                <div class="hero-stat-item hero-stat-status">
+                  <span>当前状态</span>
+                  <strong id="roundState">-</strong>
+                  <small><b id="countdownLabel">距离封盘</b><em id="lockCountdown">-</em></small>
+                </div>
+                <div class="hero-stat-item hero-stat-round">
+                  <span>当前轮次</span>
+                  <strong>第 <i id="roundId">-</i> 期</strong>
+                  <small>每 5 分钟开奖</small>
+                </div>
+              </div>
+            </div>
+            <div class="hero-visual">
+              <div class="visual-stage visual-stage-artwork">
+                <div class="visual-glow"></div>
+                <img src="./logo.webp" alt="一誓爱你·1421 主视觉" class="hero-artwork">
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section id="storySection" class="home-story-grid">
+        <article class="story-card"><span>数字密码</span>
+          <h4>1421 的含义</h4>
+          <p>1 代表何一，4 代表 CZ，21 代表币安链上 21 个核心功能板块，也象征 BNB Chain 的 21 个验证者席位。</p>
+        </article>
+        <article class="story-card"><span>爱情叙事</span>
+          <h4>链上誓约</h4>
+          <p>你不是在下注一个号码，而是在 21 位心动嘉宾中，为这条链选出一组专属于你的誓约 CP。</p>
+        </article>
+        <article class="story-card"><span>社区表达</span>
+          <h4>从两个人到一条链</h4>
+          <p>从何一与 CZ，到钱包、理财、学院、慈善与币安人生，所有功能模块共同构成一条值得被热爱的链上世界。</p>
+        </article>
+      </section>
+      <section id="mechanicsSection" class="home-mechanics-grid" hidden>
+        <article class="mechanic-card"><span class="mechanic-no">01</span>
+          <h4>主奖池</h4>
+          <p>每笔进入金库的 BNB，80% 注入主奖池；每轮仅释放当前奖池的 20%。</p>
+        </article>
+        <article class="mechanic-card"><span class="mechanic-no">02</span>
+          <h4>福缘池</h4>
+          <p>每轮释放部分的 10% 进入福缘池，专门用于长期参与者的补偿与激励。</p>
+        </article>
+        <article class="mechanic-card"><span class="mechanic-no">03</span>
+          <h4>持币保底</h4>
+          <p>连续无人中奖时触发保底轮，为长期持有并持续参与的地址提供特殊保护。</p>
+        </article>
+      </section>
+      <section class="home-cta-band">
+        <div class="home-cta-inner">
+          <span>准备好写下你的链上誓约了吗？</span>
+          <h3>选出你的本轮心动CP</h3>
+          <p>立即开始配对，进入链上爱情誓约的本轮入口。</p>
+          <button id="btnHomePlay" class="btn btn-primary home-cta-btn" type="button">开始配对</button>
+        </div>
+      </section>
+    </section>
+    <section id="playView" class="page-view play-view" hidden>
+      <div class="support-grid">
+        <article class="feature-card">
+          <div class="card-info">
+            <h4>领取奖池</h4>
+            <p>提取你当前可领取的 BNB 奖励</p>
+            <div class="my-stats-list">
+              <div class="my-stat-row"><span>待领取</span><strong id="myClaimable">0.00 BNB</strong></div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;"><button id="btnClaim"
+                class="btn btn-primary">立即领取</button><button id="btnClaimRelief" class="btn"
+                style="display:none; border-color: var(--gold); color: var(--gold);">领取保底奖励</button>
+              <p class="inline-tip">中奖或保底奖励请在 3 小时内领取</p>
+              <p id="reliefStatus" class="inline-tip">持币保底状态：待检测</p>
+            </div>
+          </div>
+          <div class="card-media support-media"><img src="./领取奖池.webp" alt="领取奖池"></div>
+        </article>
+        <article class="feature-card">
+          <div class="card-info">
+            <h4>福缘池</h4>
+            <p>为长期未中的地址累积补偿与福缘</p>
+            <div class="my-stats-list">
+              <div class="my-stat-row"><span>池总额</span><strong id="fortunePool">0.00 BNB</strong></div>
+              <div class="my-stat-row"><span>我的福缘</span><strong id="myFortunePoints">0</strong></div>
+            </div><button class="btn-enter" style="margin-top: 20px;"
+              onclick="document.getElementById('btnOpenRules').click()">玩法说明</button>
+          </div>
+          <div class="card-media support-media"><img src="./福缘池.webp" alt="福缘池"></div>
+        </article>
+        <article class="feature-card">
+          <div class="card-info">
+            <h4>誓约信息</h4>
+            <p>当前奖池、合约与上轮CP结果</p>
+            <div class="my-stats-list">
+              <div class="my-stat-row"><span>上轮CP组合</span><strong id="lastWinningNumber">-</strong></div>
+              <div class="my-stat-row"><span>本轮结束</span><strong id="roundEndTime" style="font-size: 12px;">-</strong>
+              </div>
+            </div>
+            <p id="vaultAddr" class="mono" style="font-size: 10px; color: #666; margin-top: 15px;">合约地址：-</p>
+          </div>
+          <div class="card-media support-media"><img src="./过海信息.webp" alt="誓约信息"></div>
+        </article>
+      </div>
+      <div class="data-grid play-data-grid">
+        <section class="data-card play-actions-card">
+          <div class="data-card-head">
+            <h4>快速入口</h4><span class="more">参与辅助</span>
+          </div>
+          <div class="quick-links-grid"><button class="quick-link-btn" type="button"
+              onclick="setDrawerOpen('rulesDrawer', true)">规则说明</button><button class="quick-link-btn" type="button"
+              onclick="setDrawerOpen('historyDrawer', true)">历史记录</button><button class="quick-link-btn" type="button"
+              onclick="setDrawerOpen('rankDrawer', true, 'rich')">排行榜</button><button class="quick-link-btn"
+              type="button" onclick="setDrawerOpen('personalDrawer', true)">我的数据</button></div>
+        </section>
+        <section class="data-card profile-card">
+          <div class="data-card-head">
+            <h4>我的链上档案</h4><span class="more">实时同步</span>
+          </div>
+          <div class="my-stats-list">
+            <div class="my-stat-row"><span>累计所得</span><strong id="myTotalWon">-</strong></div>
+            <div class="my-stat-row"><span>累计消耗</span><strong id="myTotalBurned">-</strong></div>
+            <div class="my-stat-row"><span>我的福缘</span><strong id="myFortunePoints_dup">-</strong></div>
+          </div>
+          <div class="attack-form" style="margin-top: 20px;">
+            <p id="taxToken" class="mono" style="font-size: 10px; color: #444; text-align: center;">代币地址：-</p>
+          </div>
+        </section>
+      </div>
+      <section class="log-wrap" hidden>
+        <h3><i class="fas fa-broadcast-tower"></i> 实时播报</h3>
+        <pre id="log"></pre>
+      </section>
+    </section>
+  </main>
+  <button id="btnOpenRules" type="button" hidden></button>
+  <div id="rankDrawer" class="drawer">
+    <div id="drawerBackdrop" class="drawer-backdrop"></div>
+    <section class="drawer-panel">
+      <div class="drawer-head">
+        <h3>榜单总览</h3><button id="btnCloseRanks" class="btn">关闭</button>
+      </div>
+      <div class="rank-tabs"><button class="rank-tab-btn active" data-tab="rich">天命榜</button><button
+          class="rank-tab-btn" data-tab="burn">誓约榜</button><button class="rank-tab-btn"
+          data-tab="fortune">福缘榜</button><button class="rank-tab-btn" data-tab="diamond">持币榜</button></div>
+      <div class="rank-actions"><button id="btnLoadRanks" class="btn">刷新榜单数据</button></div>
+      <div class="rank-content">
+        <div class="rank-pane active" id="pane-rich">
+          <h4>天命榜</h4>
+          <ol id="richList_drawer" class="rank-list"></ol>
+        </div>
+        <div class="rank-pane" id="pane-burn">
+          <h4>誓约榜</h4>
+          <ol id="burnList_drawer" class="rank-list"></ol>
+        </div>
+        <div class="rank-pane" id="pane-fortune">
+          <h4>福缘榜</h4>
+          <ol id="fortuneList" class="rank-list"></ol>
+        </div>
+        <div class="rank-pane" id="pane-diamond">
+          <h4>持币榜</h4>
+          <ol id="diamondList" class="rank-list"></ol>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div id="rulesDrawer" class="drawer">
+    <div id="rulesBackdrop" class="drawer-backdrop"></div>
+    <section class="drawer-panel">
+      <div class="drawer-head">
+        <h3>玩法机制</h3><button id="btnCloseRules" class="btn">关闭</button>
+      </div>
+      <div class="rules-content">
+        <div class="rules-intro"><strong>三步进入心动CP</strong>
+          <p>持币达标 → 选择两位不同嘉宾组成 CP → 等待本轮开奖；所有规则以链上结果为准。</p>
+        </div>
+        <div class="rule-grid">
+          <section class="rule-card">
+            <div class="rule-head"><i class="fas fa-coins"></i>
+              <h4>奖池流向</h4><span class="rule-badge">资金分配</span>
+            </div>
+            <ul class="desc">
+              <li>每笔进入金库的 BNB：80% 进入主奖池，20% 进入国库。</li>
+              <li>每轮只释放当前奖池的 20%。</li>
+              <li>该 20% 中：90% 发给本轮命中地址，10% 进入福缘池。</li>
+              <li>中奖或保底奖励需在 3 小时内领取。</li>
+            </ul>
+          </section>
+          <section class="rule-card">
+            <div class="rule-head"><i class="fas fa-user-check"></i>
+              <h4>参与资格</h4><span class="rule-badge">门槛规则</span>
+            </div>
+            <ul class="desc">
+              <li>钱包至少持有 1,000,000 枚参赛代币。</li>
+              <li>每次誓约消耗并销毁 50,000 枚代币。</li>
+              <li>单轮最多提交 5 次，且不可重复提交同一 CP 组合。</li>
+            </ul>
+          </section>
+          <section class="rule-card">
+            <div class="rule-head"><i class="fas fa-stopwatch"></i>
+              <h4>CP规则</h4><span class="rule-badge">核心玩法</span>
+            </div>
+            <ul class="desc">
+              <li>21 位心动嘉宾编号为 0-20，共 210 种 CP 组合。</li>
+              <li>每次需选择 2 位不同嘉宾，链上自动按无序组合处理。</li>
+              <li>每期开奖只产生 1 组随机 CP，命中这两位嘉宾即可中奖。</li>
+            </ul>
+          </section>
+          <section class="rule-card rule-card-highlight">
+            <div class="rule-head"><i class="fas fa-shield-halved"></i>
+              <h4>持币保底</h4><span class="rule-badge">特殊保护</span>
+            </div>
+            <ul class="desc">
+              <li>连续 10 轮无人中奖时触发保底轮。</li>
+              <li>仅面向持仓 1000 万以上的真实持币地址。</li>
+              <li>底池地址、黑洞地址等系统地址不参与分配。</li>
+            </ul>
+          </section>
+        </div>
+        <section class="rule-card guest-list-card">
+          <div class="rule-head"><i class="fas fa-heart"></i>
+            <h4>21 位心动嘉宾</h4><span class="rule-badge">完整设定</span>
+          </div>
+          <div class="guest-list-compact">
+            <div class="guest-item"><span>01</span><strong>何一</strong><em>一姐 · 唯一、一心一意</em></div>
+            <div class="guest-item"><span>02</span><strong>BNB</strong><em>爱酱 · 燃料即爱火</em></div>
+            <div class="guest-item"><span>03</span><strong>BSC</strong><em>高速路 · 爱意秒达</em></div>
+            <div class="guest-item"><span>04</span><strong>CZ</strong><em>四爷 · 誓言、四平八稳</em></div>
+            <div class="guest-item"><span>05</span><strong>币安 Web3 钱包</strong><em>船票 · 上链的门</em></div>
+            <div class="guest-item"><span>06</span><strong>币安交易所</strong><em>主战场 · 爱的基础盘</em></div>
+            <div class="guest-item"><span>07</span><strong>币安快捷买币</strong><em>快车道 · 爱要果断</em></div>
+            <div class="guest-item"><span>08</span><strong>币安 P2P</strong><em>自由桥 · 爱无中介</em></div>
+            <div class="guest-item"><span>09</span><strong>币安理财</strong><em>生息池 · 爱自动增值</em></div>
+            <div class="guest-item"><span>10</span><strong>币安定投</strong><em>日常恋 · 每天说爱你</em></div>
+            <div class="guest-item"><span>11</span><strong>币安质押</strong><em>守护者 · 爱需锁定</em></div>
+            <div class="guest-item"><span>12</span><strong>币安借贷</strong><em>借力器 · 爱可杠杆</em></div>
+            <div class="guest-item"><span>13</span><strong>币安 MegaDrop</strong><em>惊喜盒 · 爱的空投</em></div>
+            <div class="guest-item"><span>14</span><strong>币安 Launchpad/Pool</strong><em>孵化器 · 爱的新生</em></div>
+            <div class="guest-item"><span>15</span><strong>币安 Alpha</strong><em>发现者 · 寻真爱</em></div>
+            <div class="guest-item"><span>16</span><strong>币安 AI 助手</strong><em>AI 红娘 · 智爱</em></div>
+            <div class="guest-item"><span>17</span><strong>币安学院</strong><em>求知堂 · 懂爱才能爱</em></div>
+            <div class="guest-item"><span>18</span><strong>币安研究院</strong><em>深研所 · 认知之爱</em></div>
+            <div class="guest-item"><span>19</span><strong>币安广场</strong><em>朋友圈 · 爱要分享</em></div>
+            <div class="guest-item"><span>20</span><strong>币安慈善</strong><em>大爱池 · 爱有回响</em></div>
+            <div class="guest-item"><span>21</span><strong>币安人生</strong><em>信仰名 · 爱即人生</em></div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
+  <div id="historyDrawer" class="drawer">
+    <div id="historyBackdrop" class="drawer-backdrop"></div>
+    <section class="drawer-panel">
+      <div class="drawer-head">
+        <h3>近 100 期CP记录</h3><button id="btnCloseHistory" class="btn">关闭</button>
+      </div>
+      <div class="history-actions"><button id="btnToggleHistory" class="btn">展开到 100 期</button></div>
+      <div id="historyList_drawer" class="history-list"></div>
+    </section>
+  </div>
+  <div id="participationDrawer" class="drawer">
+    <div id="participationBackdrop" class="drawer-backdrop"></div>
+    <section class="drawer-panel">
+      <div class="drawer-head">
+        <h3>我的本轮CP</h3><button id="btnCloseParticipation" class="btn">关闭</button>
+      </div>
+      <div class="rules-content">
+        <section class="rule-card rule-card-highlight">
+          <div class="rule-head"><i class="fas fa-water"></i>
+            <h4>当前CP</h4><span class="rule-badge">本轮信息</span>
+          </div>
+          <p id="myRoundInfo" class="desc">我的本轮CP：-</p>
+        </section>
+        <section class="rule-card">
+          <div class="rule-head"><i class="fas fa-clock-rotate-left"></i>
+            <h4>近 5 期参考</h4><span class="rule-badge">历史走势</span>
+          </div>
+          <p id="historyRefInfo" class="desc">近 5 期CP参考：-</p>
+        </section>
+      </div>
+    </section>
+  </div>
+  <div id="personalDrawer" class="drawer">
+    <div id="personalBackdrop" class="drawer-backdrop"></div>
+    <section class="drawer-panel">
+      <div class="drawer-head">
+        <h3>我的记录详情</h3><button id="btnClosePersonal" class="btn">关闭</button>
+      </div>
+      <div class="my-stats-list">
+        <div class="my-stat-row"><span>累计所得</span><strong id="myTotalWon_drawer">-</strong></div>
+        <div class="my-stat-row"><span>累计消耗</span><strong id="myTotalBurned_drawer">-</strong></div>
+        <div class="my-stat-row"><span>我的福缘</span><strong id="myFortunePoints_drawer">-</strong></div>
+      </div>
+    </section>
+  </div>
+  <div id="rewardDrawer" class="drawer">
+    <div id="rewardBackdrop" class="drawer-backdrop"></div>
+    <section class="drawer-panel reward-panel">
+      <div class="drawer-head reward-head">
+        <h3>我的奖励</h3><button id="btnCloseRewards" class="btn reward-close">关闭</button>
+      </div>
+      <div class="reward-body"><span class="reward-kicker">领取奖池</span>
+        <div class="reward-value-wrap"><span class="reward-label">待领取</span><strong id="rewardClaimable">0.0000
+            BNB</strong></div>
+        <div class="reward-actions"><button id="btnClaimRewardModal" class="btn btn-primary reward-primary"
+            type="button">立即领取</button><button id="btnRefreshRewards" class="btn reward-secondary"
+            type="button">刷新奖励</button></div>
+      </div>
+    </section>
+  </div>
+  <div id="mechanicsIntroDrawer" class="drawer">
+    <div id="mechanicsIntroBackdrop" class="drawer-backdrop"></div>
+    <section class="drawer-panel mechanics-panel">
+      <div class="drawer-head mechanics-head">
+        <h3>誓约机制</h3>
+        <div class="mechanics-head-actions"><button id="btnMechanicsFullRules" class="btn mechanics-chip"
+            type="button">完整规则</button><button id="btnCloseMechanicsIntro" class="btn mechanics-close"
+            type="button">关闭</button></div>
+      </div>
+      <div class="mechanics-body">
+        <p class="mechanics-lead">每 5 分钟一轮，链上随机生成一组 CP。你提交的组合若命中，即获得本轮奖励。</p>
+        <div class="mechanics-grid">
+          <section class="mechanics-item">
+            <h4>参与方式</h4>
+            <ul class="mechanics-list">
+              <li>选择两位不同嘉宾组成 CP</li>
+              <li>每组誓约消耗固定参赛代币（以界面显示为准）</li>
+              <li>单钱包单轮最多提交 5 组</li>
+            </ul>
+          </section>
+          <section class="mechanics-item">
+            <h4>轮次节奏</h4>
+            <ul class="mechanics-list">
+              <li>每轮约 5 分钟，临近结束会封盘锁定</li>
+              <li>封盘后不可再提交，等待链上生成结果</li>
+              <li>若遇网络延迟，可用顶部刷新按钮手动同步</li>
+            </ul>
+          </section>
+          <section class="mechanics-item">
+            <h4>奖池流向</h4>
+            <ul class="mechanics-list">
+              <li>进入金库的 BNB 按规则注入奖池</li>
+              <li>每轮释放奖池的一部分作为本轮奖励</li>
+              <li>奖励与分配以链上合约为准</li>
+            </ul>
+          </section>
+          <section class="mechanics-item">
+            <h4>领取说明</h4>
+            <ul class="mechanics-list">
+              <li>命中后会产生可领取奖励</li>
+              <li>可在“我的奖励”中查看待领取金额并一键领取</li>
+              <li>建议在奖励出现后及时领取</li>
+            </ul>
+          </section>
+        </div>
+        <div class="mechanics-note">提示：本弹窗为机制摘要，所有最终规则与数据以链上合约状态为准。</div>
+      </div>
+    </section>
+  </div>
+  <div id="matchDrawer" class="drawer">
+    <div id="matchBackdrop" class="drawer-backdrop"></div>
+    <section class="drawer-panel match-panel">
+      <div class="drawer-head match-head">
+        <h3>开始匹配</h3>
+        <div class="match-head-actions"><button id="btnToggleParticipation" class="btn match-chip"
+            type="button">查看本轮组合</button><button id="btnOpenHistoryFromMatch" class="btn match-chip"
+            type="button">历史记录</button><button id="btnCloseMatch" class="btn match-close" type="button">关闭</button>
+        </div>
+      </div>
+      <article class="match-card">
+        <div class="double-saint-layout match-layout">
+          <div class="card-info">
+            <p class="match-sub">选出两位心动嘉宾，组成你的本轮誓约 CP。</p>
+            <div class="selected-slots">
+              <div class="slot-card"><span>一号嘉宾</span><strong id="firstSlotLabel">待选</strong><button
+                  id="clearFirstAvatar" class="slot-clear" type="button">×</button></div>
+              <div class="slot-card"><span>二号嘉宾</span><strong id="secondSlotLabel">待选</strong><button
+                  id="clearSecondAvatar" class="slot-clear" type="button">×</button></div>
+            </div>
+            <div id="avatarGrid" class="avatar-picker-grid avatar-heart-grid"></div>
+            <div class="input-group is-hidden"><select id="firstAvatar"></select><select id="secondAvatar"></select>
+              <p id="inputPreview" class="inline-tip">当前CP组合：待选择</p>
+            </div>
+          </div>
+          <div class="buy-summary-panel match-summary">
+            <div class="summary-head"><span>当前CP组合</span><strong id="currentPairDisplay">待选择</strong></div>
+            <div class="summary-count"><span>誓约数量</span><strong>1 组</strong></div>
+            <div class="summary-price">50,000 代币 / 组</div><button id="btnBuy"
+              class="btn btn-primary summary-buy">确认誓约</button>
+            <p id="buyHint" class="inline-tip">请先连接钱包后参与。</p>
+            <p id="eligibilityStatus" class="inline-tip">资格检测中...</p>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-top">
+        <div class="footer-brand"><img src="./logo.webp" alt="Logo" class="footer-logo"><span>一誓爱你·1421</span></div>
+        <div class="social-links"><a href="" title="Twitter" class="social-item"><i
+              class="fa-brands fa-x-twitter"></i></a><a href="https://t.me/ox777dev_group" target="_blank"
+            title="Telegram" class="social-item"><i class="fa-brands fa-telegram"></i></a>
+          <div class="qq-group social-item"><i class="fa-brands fa-qq"></i><span class="qq-num"></span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="disclaimer"><strong>免责声明：</strong>
+          <p>本平台仅作为区块链技术演示与链上交互娱乐使用。参与者需自行承担区块链资产波动风险，所有操作均基于链上智能合约执行。请在法律允许范围内参与，并注意资产安全。</p>
+        </div>
+        <div class="copyright">&copy; 2026 一誓爱你·1421. All Rights Reserved.</div>
+      </div>
+    </div>
+  </footer>
+  <div id="globalLoading" class="global-loading" hidden>
+    <div class="global-loading-card">
+      <div class="global-loading-spinner"></div><strong id="globalLoadingTitle">处理中</strong>
+      <p id="globalLoadingText">请稍候，系统正在同步链上状态...</p>
+    </div>
+  </div>
+  <div id="successToast" class="success-toast" hidden>
+    <div class="success-toast-card"><i class="fa-solid fa-circle-check"></i>
+      <div><strong id="successToastTitle">操作成功</strong>
+        <p id="successToastText">链上交易已确认</p>
+      </div>
+    </div>
+  </div>
+  <div id="customConfirm" class="drawer" style="z-index: 1500;">
+    <div id="confirmBackdrop" class="drawer-backdrop"></div>
+    <section class="drawer-panel confirm-panel">
+      <div class="confirm-body">
+        <div class="confirm-icon"><i class="fa-solid fa-circle-question"></i></div>
+        <h3 id="confirmTitle">确认操作</h3>
+        <p id="confirmMessage">您确定要执行此操作吗？</p>
+      </div>
+      <div class="confirm-footer"><button id="btnConfirmCancel" class="btn">取消</button><button id="btnConfirmOk"
+          class="btn btn-primary">确定</button></div>
+    </section>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+
+</html>
