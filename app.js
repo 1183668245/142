@@ -62,7 +62,7 @@ const busyButtons = new Set();
 let globalLoadingTimer = null;
 let successToastTimer = null;
 let liveFeedBusy = false;
-const BACKEND_API_BASE = "https://api.0x888.dev/api";
+const ENABLE_BACKEND_API = false;
 let injectedProvider = null;
 let injectedWalletName = "";
 
@@ -140,10 +140,6 @@ async function loadLiveFeed(force = false) {
   if (liveFeedBusy && !force) return;
   liveFeedBusy = true;
   try {
-    const res = await fetch(`${BACKEND_API_BASE}/live-feed?limit=8`, { cache: "no-store" });
-    const data = await res.json();
-    renderLiveFeed(data.items || []);
-  } catch {
     renderLiveFeed([]);
   } finally {
     liveFeedBusy = false;
@@ -611,33 +607,7 @@ async function updateRoundStatus() {
 async function checkReliefClaim(epochId) {
   reliefPending = null;
   $("btnClaimRelief").style.display = "none";
-  try {
-    const res = await fetch(`${BACKEND_API_BASE}/relief/claim/${account}`, { cache: "no-store" });
-    if (res.ok) {
-      const data = await res.json();
-      if (!data.ok) {
-        setReliefStatus("持币保底状态：接口返回异常", "warn");
-        return;
-      }
-      const isClaimed = await vault.holderReliefClaimed(epochId, account);
-      if (isClaimed) {
-        setReliefStatus(`持币保底状态：Epoch ${epochId} 已领取`, "ok");
-        return;
-      }
-      reliefPending = data;
-      $("btnClaimRelief").style.display = "inline-block";
-      setReliefStatus(`持币保底状态：Epoch ${epochId} 可领取 ${fmtBNB(data.amountWei)}`, "ok");
-      log(`[保底] 检测到 Epoch ${epochId} 有 ${fmtBNB(data.amountWei)} 奖励待领取！`);
-      return;
-    }
-
-    if (res.status === 202) setReliefStatus(`持币保底状态：Epoch ${epochId} 奖励名单生成中，请稍后刷新`, "warn");
-    else if (res.status === 404) setReliefStatus(`持币保底状态：Epoch ${epochId} 当前暂未查询到可领取奖励，请稍后刷新`, "muted");
-    else if (res.status === 400) setReliefStatus("持币保底状态：当前钱包地址无效", "warn");
-    else setReliefStatus(`持币保底状态：接口异常 ${res.status}`, "warn");
-  } catch (e) {
-    setReliefStatus("持币保底状态：后端未启动或接口不可用", "warn");
-  }
+  setReliefStatus(`持币保底状态：纯前端模式，Epoch ${epochId} 不检查后端奖励`, "muted");
 }
 
 async function updateEligibility(taxToken) {
@@ -682,15 +652,7 @@ function updateActionHints() {
 
 async function registerPlayerToBackend(address) {
   if (!address || !ethers.isAddress(address)) return;
-  try {
-    await fetch(`${BACKEND_API_BASE}/players/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ address })
-    });
-  } catch (e) {
-    log(`地址登记失败: ${humanizeError(e?.message || String(e))}`);
-  }
+  if (!ENABLE_BACKEND_API) return;
 }
 function renderRankList(elId, rows, valueKey, valueFormatter) {
   const el = $(elId);
@@ -1065,10 +1027,12 @@ async function loadRanks(force = false) {
   });
 
   try {
-    // 强制不使用缓存获取最新数据
-    const res = await fetch(`${BACKEND_API_BASE}/ranks?limit=20`, { cache: "no-store" });
-    if (!res.ok) throw new Error(`榜单接口读取失败: ${res.status}`);
-    const data = await res.json();
+    const data = ENABLE_BACKEND_API
+      ? await fetch(`${""}/ranks?limit=20`, { cache: "no-store" }).then((res) => {
+          if (!res.ok) throw new Error(`榜单接口读取失败: ${res.status}`);
+          return res.json();
+        })
+      : { rich: [], burn: [], fortune: [], diamond: [], counts: { players: 0 } };
 
     const renderUCL = (elId, rows, valueKey, valueFormatter) => {
       const el = $(elId);
